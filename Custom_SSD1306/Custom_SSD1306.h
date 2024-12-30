@@ -1,4 +1,4 @@
-/*
+/**
 	Custom_SSD1306.h
 	
 	This library does not use the display's scrolling feature.
@@ -13,7 +13,8 @@
 enum DISPLAY_COLOR {
 	BLACK,
 	WHITE,
-	INVERT
+	INVERT,
+	NOOP
 };
 
 class Custom_SSD1306 {

@@ -111,6 +111,8 @@ void Custom_SSD1306::drawPixel(unsigned int x, unsigned int y, DISPLAY_COLOR col
 		case INVERT:
 			_frameBuffer[index] ^= value;
 			break;
+		default:
+			break;  // Do nothing in this case since we must be in NOOP territory (just thought I'd make that explicit).
 	}
 }
 
@@ -133,14 +135,16 @@ void Custom_SSD1306::drawCharacter(int x, int y, uint8_t* data, int fontSize, DI
 			DISPLAY_COLOR tempColor;
 			switch (color) {
 				case BLACK:
-					tempColor = bit ? BLACK : WHITE;
+					tempColor = bit ? BLACK : NOOP;
 					break;
 				case WHITE:
-					tempColor = bit ? WHITE : BLACK;
+					tempColor = bit ? WHITE : NOOP;
 					break;
-				default:
+				case INVERT:
 					tempColor = INVERT;
 					break;
+				default:
+					break;  // Do nothing in this case since we must be in NOOP territory (just thought I'd make that explicit).
 			}
 			drawRectangle(tempX, tempY, fontSize, fontSize, tempColor);
 		}
