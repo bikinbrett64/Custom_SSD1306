@@ -2,9 +2,10 @@
 #include <Wire.h>
 #include "Custom_SSD1306.h"
 
-Custom_SSD1306::Custom_SSD1306(uint8_t addr) {
+Custom_SSD1306::Custom_SSD1306(uint8_t addr, uint8_t* font) {
 	memset(_frameBuffer, 0, 1024);
 	_address = addr;
+	_font = font;
 }
 
 bool Custom_SSD1306::begin() {
@@ -209,7 +210,9 @@ void Custom_SSD1306::print(char* text) {
 }
 
 void Custom_SSD1306::print(char c) {
-	drawCharacter(_cursorX, _cursorY, c, _fontSize, _printColor);
+	if (_font != 0) {
+		drawCharacter(_cursorX, _cursorY, &_font[(uint8_t)c], _fontSize, _printColor);
+	}
 }
 
 void Custom_SSD1306::print(long number) {

@@ -40,7 +40,7 @@ class Custom_SSD1306 {
 		int _cursorY = 0;
 		DISPLAY_COLOR _printColor = WHITE;
 		
-		char* _font;
+		uint8_t* _font;
 	
 	public:
 		/**
@@ -48,7 +48,7 @@ class Custom_SSD1306 {
 			
 			@param addr The address to use when communicating with the display.
 		*/
-		Custom_SSD1306(uint8_t addr = 0x3C, char* font = 0);
+		Custom_SSD1306(uint8_t addr = 0x3C, uint8_t* font = 0);
 		
 		/**
 			Prepares the display for use by setting the appropriate registers.
@@ -133,7 +133,7 @@ class Custom_SSD1306 {
 		/// Prints the given string at the cursor's position and with the set color and font size. Does nothing if no font is set.
 		void print(char* text);
 		
-		/// Prints the given character at the cursor's position and with the set color and font size.
+		/// Prints the given character at the cursor's position and with the set color and font size. Does nothing if no font is set.
 		void print(char c);
 		
 		/// Prints the given number at the cursor's position and with the set color and font size. Does nothing if no font is set. Prints in decimal.
