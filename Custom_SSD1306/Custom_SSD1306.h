@@ -34,14 +34,21 @@ class Custom_SSD1306 {
 		
 		const uint8_t _frameHeight = 64;
 		const uint8_t _frameWidth = 128;
+		
+		int _fontSize = 1;
+		int _cursorX = 0;
+		int _cursorY = 0;
+		DISPLAY_COLOR _printColor = WHITE;
+		
+		char* _font;
 	
 	public:
 		/**
-			Creates the display's object, specifying the I2C address and allocating a 1kB frame buffer.
+			Creates the display's object, specifying the I2C address and allocating a 1kB frame buffer as well as specifying the font data.
 			
 			@param addr The address to use when communicating with the display.
 		*/
-		Custom_SSD1306(uint8_t addr = 0x3C);
+		Custom_SSD1306(uint8_t addr = 0x3C, char* font = 0);
 		
 		/**
 			Prepares the display for use by setting the appropriate registers.
@@ -108,6 +115,29 @@ class Custom_SSD1306 {
 			@param color The color with which to draw the number.
 		*/
 		void drawInteger(int x, int y, long number, uint8_t* fontData, int fontSize, DISPLAY_COLOR color);
+		
+		/**
+			Sets the cursor to the specified location on the display.
+			
+			@param x The horizontal position at which to place the cursor.
+			@param y The vertical position at which to place the cursor.
+		*/
+		void setCursor(int x, int y);
+		
+		/// Specifies the font size to use for print statements.
+		void setFontSize(int size);
+		
+		/// Specifies the color to use for print statements.
+		void setColor(DISPLAY_COLOR color);
+		
+		/// Prints the given string at the cursor's position and with the set color and font size. Does nothing if no font is set.
+		void print(char* text);
+		
+		/// Prints the given character at the cursor's position and with the set color and font size.
+		void print(char c);
+		
+		/// Prints the given number at the cursor's position and with the set color and font size. Does nothing if no font is set. Prints in decimal.
+		void print(long number);
 		
 		/// Clears all bits in the frame buffer.
 		void clearDisplay();

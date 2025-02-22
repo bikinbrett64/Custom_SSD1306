@@ -189,6 +189,35 @@ void Custom_SSD1306::drawInteger(int x, int y, long number, uint8_t* fontData, i
 	drawString(x, y, result, fontData, fontSize, color);  // Finally, we can print the number to the display buffer.
 }
 
+void Custom_SSD1306::setCursor(int x, int y) {
+	_cursorX = x;
+	_cursorY = y;
+}
+
+void Custom_SSD1306::setFontSize(int size) {
+	_fontSize = size;
+}
+
+void Custom_SSD1306::setColor(DISPLAY_COLOR color) {
+	_printColor = color;
+}
+
+void Custom_SSD1306::print(char* text) {
+	if (_font != 0) {
+		drawString(_cursorX, _cursorY, text, _font, _fontSize, _printColor);
+	}
+}
+
+void Custom_SSD1306::print(char c) {
+	drawCharacter(_cursorX, _cursorY, c, _fontSize, _printColor);
+}
+
+void Custom_SSD1306::print(long number) {
+	if (_font != 0) {
+		drawInteger(_cursorX, _cursorY, number, _font, _fontSize, _printColor);
+	}
+}
+
 void Custom_SSD1306::clearDisplay() {
 	memset(_frameBuffer, 0, 1024);
 }
